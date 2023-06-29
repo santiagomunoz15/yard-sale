@@ -1,7 +1,17 @@
 
 const menuEmail = document.querySelector('.navbar-email');
 const desktopMenu = document.querySelector('.desktop-menu');
-const asideCart = document.querySelector('.product-detail');
+const asideCart = document.querySelector('.product-cart');
+
+const burgerMenu = document.querySelector('.mobile-menu');
+
+const menu = document.querySelector('.menu');
+
+const cardsContainer = document.querySelector('.cards-container');
+
+const productDetail = document.querySelector('.product-detail');
+
+
 
 function toggleDesktopMenu () {
 
@@ -22,7 +32,7 @@ function toggleDesktopMenu () {
 
 }
 
-const burgerMenu = document.querySelector('.mobile-menu');
+
 
 
 function toggleBurgerMenu () {
@@ -47,7 +57,6 @@ function toggleBurgerMenu () {
 
 
 
-const menu = document.querySelector('.menu');
 
 function toggleAsideCart() {
 
@@ -71,7 +80,6 @@ function toggleAsideCart() {
 
 
 
-const cardsContainer = document.querySelector('.cards-container');
 
 function toggleCardsContainer () {
 
@@ -97,7 +105,7 @@ function toggleCardsContainer () {
 //      Product          //
 
 // <div class="product-card">
-//     <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+//     <img onclick="toggleProductDetail()" src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
 //     <div class="product-info">
 //         <div>
 //             <p>$120,00</p>
@@ -109,6 +117,17 @@ function toggleCardsContainer () {
 //     </div>
 // </div>
 
+
+
+
+function openProductDetail () {
+    productDetail.classList.remove('inactive');
+}
+
+
+function closeProductDetail () {
+    productDetail.classList.add('inactive');
+}
 
 
 const productList = [];
@@ -131,16 +150,36 @@ productList.push({
     image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 });
 
+productList.push({
+    name: 'Bike',
+    price: 120,
+    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+});
+
+productList.push({
+    name: 'Car',
+    price: 999,
+    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+});
+
+productList.push({
+    name: 'Computer',
+    price: 600,
+    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+});
+
+
 function renderProducts (array) {
     for (product of array) {
     
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
     
-        const img = document.createElement('img');
-        img.setAttribute('src', product.image);
+        const productImg = document.createElement('img');
+        productImg.setAttribute('src', product.image);
+        productImg.addEventListener('click', openProductDetail);
     
-        productCard.appendChild(img);
+        productCard.appendChild(productImg);
     
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
@@ -175,3 +214,5 @@ function renderProducts (array) {
 }
 
 renderProducts(productList);
+
+
