@@ -331,14 +331,19 @@
   
   .product-detail-close {
     background: var(--white);
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
     position: absolute;
     top: 24px;
     left: 24px;
     z-index: 2;
-    padding: 12px;
+    padding: 8px;
     border-radius: 50%;
+  }
+
+  .product-detail-close svg {
+    width: 100%;
+    fill: var(--very-light-pink);
   }
 
   .product-detail-close:hover {
@@ -425,6 +430,9 @@
 
     .product-detail {
       width: 100%;
+      border-radius: 0 0 12px 12px;
+      border: none;
+      border-bottom: 3px solid var(--text-input-field);
     }
   }
 

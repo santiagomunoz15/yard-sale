@@ -121,56 +121,57 @@ function toggleCardsContainer () {
 // </div>
 
 
-
-
-function openProductDetail () {
-    productDetail.classList.remove('inactive');
-}
-
-
 function closeProductDetail () {
     productDetail.classList.add('inactive');
 }
 
 
 const productList = [];
-
+    
 productList.push({
     name: 'Bike',
     price: 120,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    image: 'https://images.pexels.com/photos/16573573/pexels-photo-16573573/free-photo-of-bosque-bicicleta-aventura-ocio.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
 productList.push({
-    name: 'Car',
-    price: 999,
-    image: 'https://images.pexels.com/photos/2643698/pexels-photo-2643698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    name: 'iPhone',
+    price: 190,
+    image: 'https://images.pexels.com/photos/14168781/pexels-photo-14168781.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
 productList.push({
     name: 'Computer',
     price: 600,
-    image: 'https://images.pexels.com/photos/10257920/pexels-photo-10257920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    image: 'https://images.pexels.com/photos/3712595/pexels-photo-3712595.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
 productList.push({
-    name: 'Bike',
-    price: 120,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    name: 'Watch',
+    price: 320,
+    image: 'https://images.pexels.com/photos/2155319/pexels-photo-2155319.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
 productList.push({
-    name: 'Car',
-    price: 999,
-    image: 'https://images.pexels.com/photos/2643698/pexels-photo-2643698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    name: 'Speaker',
+    price: 95,
+    image: 'https://images.pexels.com/photos/12715497/pexels-photo-12715497.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
 productList.push({
-    name: 'Computer',
-    price: 600,
-    image: 'https://images.pexels.com/photos/10257920/pexels-photo-10257920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    name: 'Headset',
+    price: 200,
+    image: 'https://images.pexels.com/photos/1057712/pexels-photo-1057712.jpeg?auto=compress&cs=tinysrgb&w=400',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
+
+console.log(productList);
 
 
 function renderProducts (array) {
@@ -220,3 +221,41 @@ function renderProducts (array) {
 renderProducts(productList);
 
 
+
+
+function openProductDetail () {
+    productDetail.classList.remove('inactive');
+}
+
+
+
+
+// Posible solucion para cambiar los detalles del Product Detail Aside
+
+// function productDetailContent (url, price, title, description) {
+
+    
+//     const productDetailUrl = document.createElement('img');
+//     productDetailUrl.setAttribute('src', url);
+    
+//     productDetail.appendChild(productDetailUrl);
+
+//     const productDetailDiv = document.createElement('div');
+//     productDetailDiv.classList.add('product-detail-info');
+
+//     const productDetailPrice = document.createElement('p');
+//     productDetailPrice.innerHTML = '$' + price;
+
+//     productDetailDiv.appendChild(productDetailPrice);
+
+//     const productDetailTitle = document.createElement('p');
+//     productDetailTitle.innerHTML = title;
+
+//     productDetailDiv.appendChild(productDetailTitle);
+
+//     const productDetailDescription = document.createElement('p');
+//     productDetailDescription.innerHTML = description;
+
+//     productDetailDiv.appendChild(productDetailDescription);
+
+// }
