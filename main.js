@@ -12,56 +12,39 @@ const cardsContainer = document.querySelector('.cards-container');
 const productDetail = document.querySelector('.product-detail');
 
 
+///
+
+
+const isDesktopMenuClosed = desktopMenu.classList.contains('inactive');
+const isAsideCartClosed = asideCart.classList.contains('inactive');
+const isBurgerMenuClosed = burgerMenu.classList.contains('inactive');
+const isDesktopMenuOpen = document.querySelector('.navbar-email').style.display;
+
 
 function toggleDesktopMenu () {
-
+    
     const isDesktopMenuClosed = desktopMenu.classList.contains('inactive');
-    const isAsideCartClosed = asideCart.classList.contains('inactive');
-
-    if (!isDesktopMenuClosed) {
-        isDesktopMenuClosed.classList.add('inactive');
-    }
+    
+    productDetail.classList.add('inactive');
+    asideCart.classList.add('inactive');
 
     if (isDesktopMenuClosed) {
-        isDesktopMenuClosed.classList.remove('inactive');
+        desktopMenu.classList.remove('inactive');
     }
 
-    if (!isAsideCartClosed) {
-        asideCart.classList.add('inactive');
+    else if (!isDesktopMenuClosed) {
+        desktopMenu.classList.add('inactive');
     }
 
 }
-
-
-
-
-function toggleBurgerMenu () {
-
-    const isBurgerMenuClosed = burgerMenu.classList.contains('inactive');
-    const isAsideCartClosed = asideCart.classList.contains('inactive');
-
-    if (!isBurgerMenuClosed) {
-        burgerMenu.classList.add('inactive');
-    }
-
-    if (isBurgerMenuClosed) {
-        burgerMenu.classList.remove('inactive');
-    }
-
-    if (!isAsideCartClosed) {
-        asideCart.classList.add('inactive');
-    }
-
-    toggleCardsContainer();
-}
-
-
 
 
 function toggleAsideCart() {
 
-    const isBurgerMenuClosed = burgerMenu.classList.contains('inactive');
     const isAsideCartClosed = asideCart.classList.contains('inactive');
+
+    productDetail.classList.add('inactive');
+    desktopMenu.classList.add('inactive');
 
     if (!isAsideCartClosed) {
         asideCart.classList.add('inactive');
@@ -71,7 +54,27 @@ function toggleAsideCart() {
         asideCart.classList.remove('inactive');
     }
 
-    if (!isBurgerMenuClosed) {
+    toggleCardsContainer();
+}
+
+
+
+function toggleBurgerMenu () {
+
+    const isBurgerMenuClosed = burgerMenu.classList.contains('inactive');
+    const asideCart = document.querySelector('.product-cart');
+
+    productDetail.classList.add('inactive');
+
+    if (isBurgerMenuClosed) {
+        burgerMenu.classList.remove('inactive');
+    }
+
+    else if (!isBurgerMenuClosed) {
+        burgerMenu.classList.add('inactive');
+    }
+
+    if (!isAsideCartClosed) {
         asideCart.classList.add('inactive');
     }
 
@@ -79,24 +82,22 @@ function toggleAsideCart() {
 }
 
 
-
-
 function toggleCardsContainer () {
 
-    const isAsideCartClosed = asideCart.classList.contains('inactive');
+    const menu = document.querySelector('.menu');
+    const cardsContainer = document.querySelector('.cards-container');
     const isBurgerMenuClosed = burgerMenu.classList.contains('inactive');
-    const isDesktopMenuOpen = document.querySelector('.navbar-email').style.display;
+    const isAsideCartClosed = asideCart.classList.contains('inactive');
+    const menuDisplay = getComputedStyle(menu).display;
 
-    if (isDesktopMenuOpen == 'list-item') {
-        cardsContainer.style.display = 'grid';
-    }
-    
-    if (isBurgerMenuClosed & isAsideCartClosed) {
-        cardsContainer.style.display = 'grid';
-    }
-    
-    else if (!isBurgerMenuClosed || !isAsideCartClosed) {
-        cardsContainer.style.display = 'none';
+    if (menuDisplay == 'block') {
+        if (isBurgerMenuClosed & isAsideCartClosed) {
+            cardsContainer.style.display = 'grid';
+        }
+        
+        else if (!isBurgerMenuClosed || !isAsideCartClosed) {
+            cardsContainer.style.display = 'none';
+        }
     }
 
 }
@@ -141,13 +142,13 @@ productList.push({
 productList.push({
     name: 'Car',
     price: 999,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    image: 'https://images.pexels.com/photos/2643698/pexels-photo-2643698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 });
 
 productList.push({
     name: 'Computer',
     price: 600,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    image: 'https://images.pexels.com/photos/10257920/pexels-photo-10257920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 });
 
 productList.push({
@@ -159,14 +160,15 @@ productList.push({
 productList.push({
     name: 'Car',
     price: 999,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    image: 'https://images.pexels.com/photos/2643698/pexels-photo-2643698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 });
 
 productList.push({
     name: 'Computer',
     price: 600,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    image: 'https://images.pexels.com/photos/10257920/pexels-photo-10257920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 });
+
 
 
 function renderProducts (array) {
