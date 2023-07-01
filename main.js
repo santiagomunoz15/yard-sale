@@ -24,7 +24,7 @@ const isDesktopMenuOpen = document.querySelector('.navbar-email').style.display;
 function toggleDesktopMenu () {
     
     const isDesktopMenuClosed = desktopMenu.classList.contains('inactive');
-    
+
     productDetail.classList.add('inactive');
     asideCart.classList.add('inactive');
 
@@ -45,6 +45,7 @@ function toggleAsideCart() {
 
     productDetail.classList.add('inactive');
     desktopMenu.classList.add('inactive');
+    burgerMenu.classList.add('inactive');
 
     if (!isAsideCartClosed) {
         asideCart.classList.add('inactive');
@@ -65,6 +66,7 @@ function toggleBurgerMenu () {
     const asideCart = document.querySelector('.product-cart');
 
     productDetail.classList.add('inactive');
+    asideCart.classList.add('inactive');
 
     if (isBurgerMenuClosed) {
         burgerMenu.classList.remove('inactive');
