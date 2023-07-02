@@ -170,20 +170,19 @@ productList.push({
     description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
-
-console.log(productList);
-
+var i = 0;
 
 function renderProducts (array) {
-    for (product of array) {
-    
+    for (product of array) {  
+
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
+        productCard.setAttribute('id', i);
     
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
         productImg.addEventListener('click', openProductDetail);
-    
+
         productCard.appendChild(productImg);
     
         const productInfo = document.createElement('div');
@@ -215,17 +214,32 @@ function renderProducts (array) {
         productInfoFigure.appendChild(productInfoImg);
     
         cardsContainer.appendChild(productCard);
+
+        i++;
     }
 }
 
-renderProducts(productList);
-
-
-
-
 function openProductDetail () {
+
+    var id = event.target.parentNode.getAttribute('id');
+
+    const productDetailImg = document.querySelector('.product-detail-img');
+    productDetailImg.setAttribute('src', productList[id].image);
+
+    const productDetailPrice = document.querySelector('.product-detail-price');
+    productDetailPrice.innerHTML = '$' + productList[id].price;
+
+    const productDetailTitle = document.querySelector('.product-detail-title');
+    productDetailTitle.innerHTML = productList[id].name;
+
+    const productDetailDescription = document.querySelector('.product-detail-description');
+    productDetailDescription.innerHTML = productList[id].description;
+
     productDetail.classList.remove('inactive');
+
 }
+
+renderProducts(productList);
 
 
 
