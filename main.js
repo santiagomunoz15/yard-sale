@@ -11,9 +11,7 @@ const cardsContainer = document.querySelector('.cards-container');
 
 const productDetail = document.querySelector('.product-detail');
 
-
 ///
-
 
 const isDesktopMenuClosed = desktopMenu.classList.contains('inactive');
 const isAsideCartClosed = asideCart.classList.contains('inactive');
@@ -91,38 +89,31 @@ function toggleCardsContainer () {
     const isBurgerMenuClosed = burgerMenu.classList.contains('inactive');
     const isAsideCartClosed = asideCart.classList.contains('inactive');
     const menuDisplay = getComputedStyle(menu).display;
+    const isProductDetailClosed = productDetail.classList.contains('inactive');
 
     if (menuDisplay == 'block') {
-        if (isBurgerMenuClosed & isAsideCartClosed) {
+        if (!isProductDetailClosed) {
+            cardsContainer.style.display = 'none';
+        }
+
+        if (isBurgerMenuClosed & isAsideCartClosed & isProductDetailClosed) {
             cardsContainer.style.display = 'grid';
         }
         
         else if (!isBurgerMenuClosed || !isAsideCartClosed) {
             cardsContainer.style.display = 'none';
         }
+
+        
     }
 
 }
 
 
-//      Product          //
-
-// <div class="product-card">
-//     <img onclick="toggleProductDetail()" src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-//     <div class="product-info">
-//         <div>
-//             <p>$120,00</p>
-//             <p>Bike</p>
-//         </div>
-//         <figure>
-//             <img src="./icons/bt_add_to_cart.svg" alt="">
-//         </figure>
-//     </div>
-// </div>
-
 
 function closeProductDetail () {
     productDetail.classList.add('inactive');
+    toggleCardsContainer();
 }
 
 
@@ -131,43 +122,43 @@ const productList = [];
 productList.push({
     name: 'Bike',
     price: 120,
-    image: 'https://images.pexels.com/photos/16573573/pexels-photo-16573573/free-photo-of-bosque-bicicleta-aventura-ocio.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/16573573/pexels-photo-16573573/free-photo-of-bosque-bicicleta-aventura-ocio.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
 });
 
 productList.push({
     name: 'iPhone',
     price: 190,
-    image: 'https://images.pexels.com/photos/14168781/pexels-photo-14168781.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
+    image: 'https://images.pexels.com/photos/14168781/pexels-photo-14168781.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Cutting-edge smartphone with powerful features and sleek design for seamless communication and entertainment.'
 });
 
 productList.push({
-    name: 'Computer',
+    name: 'Laptop',
     price: 600,
-    image: 'https://images.pexels.com/photos/3712595/pexels-photo-3712595.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
+    image: 'https://images.pexels.com/photos/3712595/pexels-photo-3712595.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Portable computer for productivity on the go, offering versatility and performance for work, study, and entertainment.'
 });
 
 productList.push({
     name: 'Watch',
     price: 320,
-    image: 'https://images.pexels.com/photos/2155319/pexels-photo-2155319.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
+    image: 'https://images.pexels.com/photos/2155319/pexels-photo-2155319.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Stylish timepiece that combines fashion and functionality, keeping you punctual while adding a touch of sophistication.'
 });
 
 productList.push({
     name: 'Speaker',
     price: 95,
-    image: 'https://images.pexels.com/photos/12715497/pexels-photo-12715497.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
+    image: 'https://images.pexels.com/photos/12715497/pexels-photo-12715497.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'High-quality audio device delivering immersive sound and enhancing your music listening or home theater experience.'
 });
 
 productList.push({
     name: 'Headset',
     price: 200,
-    image: 'https://images.pexels.com/photos/1057712/pexels-photo-1057712.jpeg?auto=compress&cs=tinysrgb&w=400',
-    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.'
+    image: 'https://images.pexels.com/photos/1057712/pexels-photo-1057712.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Personal audio accessory providing exceptional sound quality and comfort, perfect for music, gaming, or private listening.'
 });
 
 var i = 0;
@@ -181,6 +172,7 @@ function renderProducts (array) {
     
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
+        productImg.setAttribute('alt', product.name + 'image');
         productImg.addEventListener('click', openProductDetail);
 
         productCard.appendChild(productImg);
@@ -210,7 +202,9 @@ function renderProducts (array) {
     
         const productInfoImg = document.createElement('img');
         productInfoImg.setAttribute('src', './icons/bt_add_to_cart.svg');
-    
+        productInfoImg.setAttribute('alt', 'Add to shopping cart icon');
+        productInfoImg.addEventListener('click', renderShoppingCart);
+
         productInfoFigure.appendChild(productInfoImg);
     
         cardsContainer.appendChild(productCard);
@@ -218,6 +212,9 @@ function renderProducts (array) {
         i++;
     }
 }
+
+renderProducts(productList);
+
 
 function openProductDetail () {
 
@@ -237,39 +234,112 @@ function openProductDetail () {
 
     productDetail.classList.remove('inactive');
 
+    toggleCardsContainer();
 }
 
-renderProducts(productList);
 
-
-
-
-// Posible solucion para cambiar los detalles del Product Detail Aside
-
-// function productDetailContent (url, price, title, description) {
-
+function renderShoppingCart () {
     
-//     const productDetailUrl = document.createElement('img');
-//     productDetailUrl.setAttribute('src', url);
+    var id = event.target.closest('.product-card');
+    var idValue = id.getAttribute('id');
+
+    console.log("Shopping Cart Evoked");
     
-//     productDetail.appendChild(productDetailUrl);
+    const shoppingCartDiv = document.querySelector('.shopping-cart');
 
-//     const productDetailDiv = document.createElement('div');
-//     productDetailDiv.classList.add('product-detail-info');
+    const shoppingCartContainer = document.createElement('div');
+    shoppingCartContainer.classList.add('shopping-cart-product');
+    
+    const shoppingCartFigure = document.createElement('figure');
+    
+    shoppingCartContainer.appendChild(shoppingCartFigure);
+    
+    const shoppingCartImg = document.createElement('img');
+    shoppingCartImg.setAttribute('src', productList[idValue].image);
+    shoppingCartImg.setAttribute('alt', productList[idValue].name + 'image');
 
-//     const productDetailPrice = document.createElement('p');
-//     productDetailPrice.innerHTML = '$' + price;
+    shoppingCartFigure.appendChild(shoppingCartImg);
 
-//     productDetailDiv.appendChild(productDetailPrice);
+    const shoppingCartTitle = document.createElement('p');
+    shoppingCartTitle.innerHTML = productList[idValue].name;
 
-//     const productDetailTitle = document.createElement('p');
-//     productDetailTitle.innerHTML = title;
+    shoppingCartContainer.appendChild(shoppingCartTitle);
 
-//     productDetailDiv.appendChild(productDetailTitle);
+    const shoppingCartPrice = document.createElement('p');
+    shoppingCartPrice.innerHTML = '$' + productList[idValue].price;
 
-//     const productDetailDescription = document.createElement('p');
-//     productDetailDescription.innerHTML = description;
+    shoppingCartContainer.appendChild(shoppingCartPrice);
 
-//     productDetailDiv.appendChild(productDetailDescription);
+    const shoppingCartClose = document.createElement('img');
+    shoppingCartClose.setAttribute('src', './icons/icon_close.png');
+    shoppingCartClose.setAttribute('alt', 'close icon');
+    shoppingCartClose.addEventListener('click', removeShoppingCartProduct);
+
+    shoppingCartContainer.appendChild(shoppingCartClose);
+
+    shoppingCartDiv.appendChild(shoppingCartContainer);
+
+    i = -1;
+}
+
+
+// ---------------------------------------------------------
+
+// Funcion con valores ya asignados
+
+// function renderShoppingCart () {
+
+//     var id = event.target.closest('.product-card');
+    
+//     const shoppingCartDiv = document.querySelector('.shopping-cart');
+
+//     const shoppingCartContainer = document.createElement('div');
+//     shoppingCartContainer.classList.add('shopping-cart-product');
+//     shoppingCartContainer.setAttribute('id', i);
+    
+//     const shoppingCartFigure = document.createElement('figure');
+    
+//     shoppingCartContainer.appendChild(shoppingCartFigure);
+    
+//     const shoppingCartImg = document.createElement('img');
+//     shoppingCartImg.setAttribute('src', 'https://images.pexels.com/photos/1057712/pexels-photo-1057712.jpeg?auto=compress&cs=tinysrgb&w=800');
+//     shoppingCartImg.setAttribute('alt', 'computer' + 'image');
+
+//     shoppingCartFigure.appendChild(shoppingCartImg);
+
+//     const shoppingCartTitle = document.createElement('p');
+//     shoppingCartTitle.innerHTML = 'Computer';
+
+//     shoppingCartContainer.appendChild(shoppingCartTitle);
+
+//     const shoppingCartPrice = document.createElement('p');
+//     shoppingCartPrice.innerHTML = '$' + '50';
+
+//     shoppingCartContainer.appendChild(shoppingCartPrice);
+
+//     const shoppingCartClose = document.createElement('img');
+//     shoppingCartClose.setAttribute('src', './icons/icon_close.png');
+//     shoppingCartClose.setAttribute('alt', 'close icon');
+//     shoppingCartClose.addEventListener('click', removeShoppingCartProduct);
+
+//     shoppingCartContainer.appendChild(shoppingCartClose);
+
+//     shoppingCartDiv.appendChild(shoppingCartContainer);
+
+//     i--;
 
 // }
+
+
+function removeShoppingCartProduct () {
+    
+    
+    var id = event.target.closest('.shopping-cart-product');
+    
+    console.log(id);
+
+    
+}
+
+
+

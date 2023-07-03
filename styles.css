@@ -225,7 +225,7 @@
     font-weight: bold;
   }
 
-  .shopping-cart {
+  .shopping-cart-product {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     gap: 16px;
