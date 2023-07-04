@@ -215,13 +215,19 @@ function renderProducts (array) {
 
 renderProducts(productList);
 
+const productDetailCounter = document.getElementById('product-detail-counter');
 
 function openProductDetail () {
 
     var id = event.target.parentNode.getAttribute('id');
 
+    const asideCart = document.querySelector('.product-cart');
+    asideCart.classList.add('inactive');
+
     const productDetailImg = document.querySelector('.product-detail-img');
     productDetailImg.setAttribute('src', productList[id].image);
+    
+    productDetailCounter.classList = id;
 
     const productDetailPrice = document.querySelector('.product-detail-price');
     productDetailPrice.innerHTML = '$' + productList[id].price;
@@ -238,17 +244,34 @@ function openProductDetail () {
 }
 
 
+function productDetailAddProduct () {
+    
+    var productDetailCounterValue =productDetailCounter.getAttribute('class');
+
+    const parentCardElement = document.getElementById(productDetailCounterValue);
+
+    console.log(parentCardElement);
+
+    
+}
+
+
+i = 0;
+var counter = 0;
+
 function renderShoppingCart () {
     
+    var cart = 'a' + i;
+    counter++;
+
     var id = event.target.closest('.product-card');
     var idValue = id.getAttribute('id');
-
-    console.log("Shopping Cart Evoked");
     
     const shoppingCartDiv = document.querySelector('.shopping-cart');
 
     const shoppingCartContainer = document.createElement('div');
     shoppingCartContainer.classList.add('shopping-cart-product');
+    shoppingCartContainer.setAttribute('id', cart);
     
     const shoppingCartFigure = document.createElement('figure');
     
@@ -266,6 +289,7 @@ function renderShoppingCart () {
     shoppingCartContainer.appendChild(shoppingCartTitle);
 
     const shoppingCartPrice = document.createElement('p');
+    shoppingCartPrice.classList.add(cart);
     shoppingCartPrice.innerHTML = '$' + productList[idValue].price;
 
     shoppingCartContainer.appendChild(shoppingCartPrice);
@@ -279,67 +303,52 @@ function renderShoppingCart () {
 
     shoppingCartDiv.appendChild(shoppingCartContainer);
 
-    i = -1;
+
+
+    const shoppingCartTotal = document.querySelector('.shopping-cart-total');
+    
+    const shoppingCartTotalSum = productList[idValue].price + parseInt(shoppingCartTotal.innerHTML);
+    
+    shoppingCartTotal.innerHTML = shoppingCartTotalSum;
+
+
+    const shoppingCartNumber = document.querySelector('.shopping-cart-number');
+    shoppingCartNumber.innerHTML = counter;
+    
+    i++;
+}
+
+
+function removeShoppingCartProduct () {
+
+    counter = counter - 1;
+
+    var id = event.target.closest('.shopping-cart-product');
+
+    var idValue = id.getAttribute('id');
+
+    const shoppingCartCloseProduct = document.getElementById(idValue);
+    
+    const shoppingCartNumber = document.querySelector('.shopping-cart-number');
+    
+    const shoppingCartTotal = document.querySelector('.shopping-cart-total');
+    
+    const shoppingCartPriceClass = document.getElementsByClassName(String(idValue))[0].innerHTML;
+    const priceValue = parseInt(shoppingCartPriceClass.replace('$', ''))
+    
+    const shoppingCartTotalSum = parseInt(shoppingCartTotal.innerHTML) - priceValue;
+    
+    shoppingCartTotal.innerHTML = shoppingCartTotalSum;
+    
+    shoppingCartNumber.innerHTML = counter;
+    
+    shoppingCartCloseProduct.remove();
 }
 
 
 // ---------------------------------------------------------
 
-// Funcion con valores ya asignados
 
-// function renderShoppingCart () {
-
-//     var id = event.target.closest('.product-card');
-    
-//     const shoppingCartDiv = document.querySelector('.shopping-cart');
-
-//     const shoppingCartContainer = document.createElement('div');
-//     shoppingCartContainer.classList.add('shopping-cart-product');
-//     shoppingCartContainer.setAttribute('id', i);
-    
-//     const shoppingCartFigure = document.createElement('figure');
-    
-//     shoppingCartContainer.appendChild(shoppingCartFigure);
-    
-//     const shoppingCartImg = document.createElement('img');
-//     shoppingCartImg.setAttribute('src', 'https://images.pexels.com/photos/1057712/pexels-photo-1057712.jpeg?auto=compress&cs=tinysrgb&w=800');
-//     shoppingCartImg.setAttribute('alt', 'computer' + 'image');
-
-//     shoppingCartFigure.appendChild(shoppingCartImg);
-
-//     const shoppingCartTitle = document.createElement('p');
-//     shoppingCartTitle.innerHTML = 'Computer';
-
-//     shoppingCartContainer.appendChild(shoppingCartTitle);
-
-//     const shoppingCartPrice = document.createElement('p');
-//     shoppingCartPrice.innerHTML = '$' + '50';
-
-//     shoppingCartContainer.appendChild(shoppingCartPrice);
-
-//     const shoppingCartClose = document.createElement('img');
-//     shoppingCartClose.setAttribute('src', './icons/icon_close.png');
-//     shoppingCartClose.setAttribute('alt', 'close icon');
-//     shoppingCartClose.addEventListener('click', removeShoppingCartProduct);
-
-//     shoppingCartContainer.appendChild(shoppingCartClose);
-
-//     shoppingCartDiv.appendChild(shoppingCartContainer);
-
-//     i--;
-
-// }
-
-
-function removeShoppingCartProduct () {
-    
-    
-    var id = event.target.closest('.shopping-cart-product');
-    
-    console.log(id);
-
-    
-}
 
 
 

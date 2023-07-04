@@ -47,7 +47,7 @@
         <li onclick="toggleDesktopMenu()" class="navbar-email">platzi@example.com</li>
         <li onclick="toggleAsideCart()" class="navbar-shopping-cart">
           <img src="./icons/icon_shopping_cart.svg" alt="shopping cart">
-          <div>0</div>
+          <div class="shopping-cart-number">0</div>
         </li>
       </ul>
     </div>
@@ -133,7 +133,7 @@
           <p>
             <span>Total</span>
           </p>
-          <p class="shopping-cart-total">$510.00</p>
+          <p>$<span class="shopping-cart-total">0</span>.00</p>
         </div>
   
         <button class="primary-button">
@@ -152,10 +152,11 @@
         <p class="product-detail-price">$35,00</p>
         <p class="product-detail-title">Bike</p>
         <p class="product-detail-description">With its practical position, this bike also fulfills a decorative function, add your hall or workspace.</p>
-        <button class="primary-button add-to-cart-button">
+        <button class="primary-button add-to-cart-button" onclick="productDetailAddProduct ()">
           <img src="./icons/bt_add_to_cart.svg" alt="add to cart">
           Add to cart
         </button>
+        <div id="product-detail-counter"></div>
       </div>
     </aside>
 
