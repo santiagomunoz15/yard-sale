@@ -197,13 +197,15 @@ function renderProducts (array) {
         productInfoDiv.appendChild(productName);
     
         const productInfoFigure = document.createElement('figure');
+        productInfoFigure.classList = 'product-card-figure';
+        productInfoFigure.addEventListener('click', renderShoppingCart);
+
     
         productInfo.appendChild(productInfoFigure);
     
         const productInfoImg = document.createElement('img');
         productInfoImg.setAttribute('src', './icons/bt_add_to_cart.svg');
         productInfoImg.setAttribute('alt', 'Add to shopping cart icon');
-        productInfoImg.addEventListener('click', renderShoppingCart);
 
         productInfoFigure.appendChild(productInfoImg);
     
@@ -246,13 +248,14 @@ function openProductDetail () {
 
 function productDetailAddProduct () {
     
-    var productDetailCounterValue =productDetailCounter.getAttribute('class');
+    var productDetailCounterValue = productDetailCounter.getAttribute('class');
 
-    const parentCardElement = document.getElementById(productDetailCounterValue);
-
-    console.log(parentCardElement);
-
+    const productInfoFigure = document.getElementsByClassName('product-card-figure')[productDetailCounterValue];
     
+    const clickEvent = new Event('click');
+
+    productInfoFigure.dispatchEvent(clickEvent);
+
 }
 
 
@@ -260,7 +263,7 @@ i = 0;
 var counter = 0;
 
 function renderShoppingCart () {
-    
+
     var cart = 'a' + i;
     counter++;
 
